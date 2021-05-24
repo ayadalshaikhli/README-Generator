@@ -1,16 +1,63 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-// function renderLicenseBadge(license) {}
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-// function renderLicenseLink(license) {}
+function renderLicenseSelection(license) {
+  if (license !== "None") {
+    switch (license) {
+      case "MIT":
+        return `https://opensource.org/licenses/MIT`;
+      case "APACHE 2.0":
+        return `https://opensource.org/licenses/Apache-2.0`;
+      case "GPL 3.0":
+        return `https://www.gnu.org/licenses/gpl-3.0`;
+      case "BSD 3":
+        return `https://opensource.org/licenses/BSD-3-Clause`;
+    }
+  }
+}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-// function renderLicenseSection(license) {}
+function renderLicenseBadge(license) {
+  if (license !== "None") {
+    switch (license) {
+      case "MIT":
+        return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](${renderLicenseSelection(license)})`;
+      case "APACHE 2.0":
+        return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](${renderLicenseSelection(license)})`;
+      case "GPL 3.0":
+        return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](${renderLicenseSelection(license)})`;
+      case "BSD 3":
+        return `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](${renderLicenseSelection(license)})`;
+    }
+  } else {
+    return "";
+  }
 
-// TODO: Create a function to generate markdown for README
+}
+
+function renderTableOfContents(license) {
+  if (license !== "None") {
+    return `[Installation](#installation)  
+    [Usage](#usage)  
+    [License](#license)  
+    [Contributing](#contributing)  
+    [Tests](#tests)  
+    [Questions](#questions)  `;
+  } else {
+    return `[Installation](#installation)  
+    [Usage](#usage)  
+    [Contributing](#contributing)  
+    [Tests](#tests)  
+    [Questions](#questions)  `;
+  }
+}
+
+function renderLicenseSection(license) {
+  if (license !== "None") {
+    return `## License
+  This project is licensed under the terms of the [${license}](${renderLicenseSelection(license)}) license.`
+  } else {
+    return "";
+  }
+}
+
 function generateMarkdown(answers) {
   return `
   <!-- PROJECT LOGO -->
@@ -18,7 +65,7 @@ function generateMarkdown(answers) {
   <p align="center">
       <img src="${answers.projectLogoImg}" alt="Logo" width="80" height="80">
   
-    <h3 align="center">${answers.projectTitle}</h3>
+    <h3 align="center"> ${answers.projectTitle} </h3>
   
     <p align="center">
       ${answers.projectDescription}
@@ -62,42 +109,36 @@ function generateMarkdown(answers) {
   ### Built With
   
   - [](${answers.projectBuiltWith})
-  - []()
-  - []()
-  
+
   <!-- GETTING STARTED -->
-  
-  
+
   ## Installation
    ${answers.installation}
   
   
-  <!-- USAGE EXAMPLES -->
-  
   ## Usage
-  
    ${answers.usage}
-  <!-- ROADMAP -->
-  
-  
-  <!-- CONTRIBUTING -->
-  
+
   
   <!-- LICENSE -->
   
   ## License
-  ![badge](https://img.shields.io/badge/license-${answers.license}-brightgreen)
-  <br />
-  This application is covered by the ${answers.license} license. 
-  
+    ${answers.projectTitle}
+  ${renderLicenseBadge(answers.license)}
+
+  ## Table of Contents
+  ${renderTableOfContents(answers.license)}
+
+  ## Contributing
+  ${answers.contribution}
+  ${renderLicenseSection(answers.license)}
+
+
   <!-- CONTACT -->
   
   ## Contact
-  
-  Your Name - [${answers.email}](${answers.email}) - email
-  
-  Project Link: [${answers.projectLink}](${answers.projectLink})
-  Project Github Link: [${answers.projectGithubLink}](${answers.projectGithubeLink})
+  https://github.com/${answers.username}  
+  For questions and suggestions, contact me at ${answers.email}.
   
   
 `;
