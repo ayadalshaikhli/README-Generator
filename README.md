@@ -38,11 +38,7 @@ Simple Node application to generate README file.
 ### Built With
 
 - [JavaScript](https://www.javascript.com/)
-- [HTML](https://html.com/)
-- [CSS](https://www.google.com/)
-- [Bulma](https://bulma.io/)
-- [MapBox](https://www.mapbox.com/)
-- [thesportApi](https://www.thesportsdb.com/)
+- [Node.Js](https://nodejs.org/en/)
 
 ## Installation
 
