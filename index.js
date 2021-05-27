@@ -20,8 +20,8 @@ function validateInput(input) {
     }
     return true;
 }
-// TODO: Create an array of questions for user input
-const questions = [
+// TODO: Create an array of questionsList for user input
+const questionsList = [
         {
             type: 'input',
             name: 'projectTitle',
@@ -39,14 +39,15 @@ const questions = [
         },
         {
             type: "input",
-            message: "Enter your email",
             name: "email",
+            message: "Enter your email",
             emailValidation: true,
         },
         {
             type: "input",
-            message: "Enter your GitHub username",
             name: "username",
+            message: "Enter your GitHub username",
+            
         },
         {
             type: 'input',
@@ -71,30 +72,33 @@ const questions = [
         },
         {
             type: "input",
+            name: "projectInstallation",
             message: "Enter the installation instructions",
-            name: "installation",
+            
         },
         {
             type: "input",
+            name: "projectUsage",
             message: "Enter the usage instructions",
-            name: "usage",
+            
         },
         {
             type: "input",
+            name: "projectContribution",
             message: "Enter contribution guidelines",
-            name: "contribution",
+            
         },
         {
             type: "list",
+            name: "projectLicense",
             message: "Choose a license",
-            name: "license",
             choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"],
         }
     ];
 
 
 
-questions.forEach(el => el.validate = validateInput.bind(el))
+questionsList.forEach(el => el.validate = validateInput.bind(el))
 
 
 // TODO: Create a function to write README file
@@ -104,7 +108,7 @@ questions.forEach(el => el.validate = validateInput.bind(el))
 
 const init = () => {
     inquirer.
-    prompt(questions)
+    prompt(questionsList)
     .then((answers) => writeFileAsync ("./read/README.md", generateMarkdown(answers)))
     .then(() => console.log("successfully done"))
     .catch((err) => console.error(err))
