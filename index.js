@@ -6,22 +6,10 @@ const generateMarkdown = require("./utils/generateMarkdown.js");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-function validateInput(input) {
-    if (input === "") {
-        console.log(chalk.red(`Please enter ${this.name}`));
-        return false;
-    }
-    if (this.emailValidation) {
-        const isValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/.test(input);
-        if (!isValid) {
-            console.log(chalk.red(" Please enter a valid email"));
-        }
-        return isValid;
-    }
-    return true;
-}
+
 // TODO: Create an array of questionsList for user input
-const questionsList = [
+const promptUser = () =>{
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'projectTitle',
@@ -41,7 +29,6 @@ const questionsList = [
             type: "input",
             name: "email",
             message: "Enter your email",
-            emailValidation: true,
         },
         {
             type: "input",
@@ -71,6 +58,12 @@ const questionsList = [
             choices: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
         },
         {
+            type: "list",
+            name: "projectLicense",
+            message: "Choose a license",
+            choices: ["ARTISTIC-2.0","AGPL-3.0","Zlib","MIT","APACHE 2.0", "GPL 3.0", "BSD 3", "Unlicensed"],
+        },
+        {
             type: "input",
             name: "projectInstallation",
             message: "Enter the installation instructions",
@@ -88,17 +81,11 @@ const questionsList = [
             message: "Enter contribution guidelines",
             
         },
-        {
-            type: "list",
-            name: "projectLicense",
-            message: "Choose a license",
-            choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"],
-        }
-    ];
+
+    ]);
+};
 
 
-
-questionsList.forEach(el => el.validate = validateInput.bind(el))
 
 
 // TODO: Create a function to write README file
@@ -107,8 +94,7 @@ questionsList.forEach(el => el.validate = validateInput.bind(el))
 // TODO: Create a function to initialize app
 
 const init = () => {
-    inquirer.
-    prompt(questionsList)
+    promptUser()
     .then((answers) => writeFileAsync ("./read/README.md", generateMarkdown(answers)))
     .then(() => console.log("successfully done"))
     .catch((err) => console.error(err))

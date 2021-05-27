@@ -1,65 +1,70 @@
-
-function renderLicenseSelection(projectLicense) {
-  if (projectLicense !== "None") {
+function renderLicenseBadge(projectLicense){
+  if(projectLicense !== "Unlicensed"){
+    switch(projectLicense){
+      case "ARTISTIC-2.0":
+        return `[![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)`;
+      case "AGPL-3.0" :
+        return `[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)`; 
+        case "Zlib" :
+          return `[![License: Zlib](https://img.shields.io/badge/License-Zlib-lightgrey.svg)](https://opensource.org/licenses/Zlib)`;
+        case "MIT" :
+          return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+        case "APACHE 2.0" :
+          return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
+        case "GPL 3.0" :
+          return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`;
+        case "BSD 3" :
+          return `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`;
+        
+    }
+  }else{
+    return ""
+  }
+}
+// TODO: Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(projectLicense)  {
+  if (projectLicense !== "Unlicensed") {
     switch (projectLicense) {
-      case "BSD 3":
-        return `https://opensource.org/licenses/BSD-3-Clause`;
-      case "MIT":
-        return `https://opensource.org/licenses/MIT`;
-
-      case "GPL 3.0":
-        return `https://www.gnu.org/licenses/gpl-3.0`;
+      case "ARTISTIC-2.0":
+        return `https://opensource.org/licenses/Artistic-2.0`;
+        case "AGPL-3.0" :
+          return `https://www.gnu.org/licenses/agpl-3.0`;
+          case "Zlib" :
+            return `https://opensource.org/licenses/Zlib`;
+            case "MIT" :
+            return `https://opensource.org/licenses/MIT`;
         case "APACHE 2.0":
           return `https://opensource.org/licenses/Apache-2.0`;
+          case "GPL 3.0" :
+            return `https://www.gnu.org/licenses/gpl-3.0`;
+          case "BSD 3" :
+            return `https://opensource.org/licenses/BSD-3-Clause`;
 
     }
+  }else{
+    return ""
   }
 }
-
-function renderLicenseBadge(projectLicense) {
-  if (projectLicense !== "None") {
-    switch (projectLicense) {
-      case "BSD 3":
-        return `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](${renderLicenseSelection(projectLicense)})`;
-      case "MIT":
-        return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](${renderLicenseSelection(projectLicense)})`;
-      case "APACHE 2.0":
-        return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](${renderLicenseSelection(projectLicense)})`;
-      case "GPL 3.0":
-        return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](${renderLicenseSelection(projectLicense)})`;
- 
-    }
-  } else {
-    return "";
-  }
-
-}
-
-function renderTableOfContents(projectLicense) {
-  if (projectLicense !== "None") {
-    return `[Installation](#installation)  
-    [Usage](#usage)  
-    [License](#projectLicense)  
-    [Contributing](#contributing)  
-    [Tests](#tests)  
-    [Questions](#questions)  `;
-  } else {
-    return `[Installation](#installation)  
-    [Usage](#usage)  
-    [Contributing](#contributing)  
-    [Tests](#tests)  
-    [Questions](#questions)  `;
-  }
-}
-
 function renderLicenseSection(projectLicense) {
-  if (projectLicense !== "None") {
+  if (projectLicense !== "Unlicensed") {
     return `## License
-  This project is licensed under the terms of the [${projectLicense}](${renderLicenseSelection(projectLicense)}) projectLicense.`
+   [${projectLicense}] Project License.
+   `
   } else {
     return "";
   }
 }
+// function renderLicenseSection(projectLicense) {
+//   if(projectLicense !== "Unlicensed"){
+//   return `## License  [${answers.projectTitle}]
+//   (${renderLicenseBadge(answers.projectLicense)})
+//   (${renderLicenseLink(answers.projectLicense)})
+//   `
+// }else{
+//   return ""
+// }
+// }
 
 function generateMarkdown(answers) {
   return `
@@ -117,6 +122,11 @@ function generateMarkdown(answers) {
 
   ## Installation
    ${answers.projectInstallation}
+   <!-- CONTACT -->
+  ## Contact
+  https://github.com/${answers.username}  
+  Email ${answers.email}.
+  
   
   
   ## Usage
@@ -124,26 +134,13 @@ function generateMarkdown(answers) {
 
   
   <!-- LICENSE -->
-  
-  ## License
-  ${answers.projectTitle}
-  ${renderLicenseBadge(answers.projectLicense)}
 
-  ## Table of Contents
-  ${renderTableOfContents(answers.projectLicense)}
-
-  ## Contributing
-  ${answers.projectContribution}
   ${renderLicenseSection(answers.projectLicense)}
+  ${renderLicenseBadge(answers.projectLicense)}
+  ${renderLicenseLink(answers.projectLicense)}
 
 
-  <!-- CONTACT -->
-  
-  ## Contact
-  https://github.com/${answers.username}  
-  For questions and suggestions, contact me at ${answers.email}.
-  
-  
+
 `;
 }
 

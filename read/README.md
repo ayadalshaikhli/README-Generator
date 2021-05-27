@@ -53,6 +53,11 @@
 
   ## Installation
    123
+   <!-- CONTACT -->
+  ## Contact
+  https://github.com/123  
+  Email 123.
+  
   
   
   ## Usage
@@ -60,29 +65,12 @@
 
   
   <!-- LICENSE -->
-  
+
   ## License
-  123
-  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-  ## Table of Contents
-  [Installation](#installation)  
-    [Usage](#usage)  
-    [License](#projectLicense)  
-    [Contributing](#contributing)  
-    [Tests](#tests)  
-    [Questions](#questions)  
-
-  ## Contributing
-  123
-  ## License
-  This project is licensed under the terms of the [GPL 3.0](https://www.gnu.org/licenses/gpl-3.0) projectLicense.
+   [ARTISTIC-2.0] Project License.
+   
+  [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
+  https://opensource.org/licenses/Artistic-2.0
 
 
-  <!-- CONTACT -->
-  
-  ## Contact
-  https://github.com/ayad  
-  For questions and suggestions, contact me at ayad@gmail.com.
-  
-  
+
